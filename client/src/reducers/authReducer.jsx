@@ -1,6 +1,4 @@
 import {
-    USER_LOADING,
-    USER_LOADED,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
@@ -17,18 +15,6 @@ const initialState = {
 
 function authReducer (state=initialState, action){
     switch(action.type){
-
-        case USER_LOADING:
-            return {
-                ...state,
-                isLoading: true
-            };
-        case USER_LOADED:
-            return{
-                ...state,
-                isAuthenticated: true,
-                isLoading: false,
-            }
 
         case LOGIN_SUCCESS:
         case SIGNUP_SUCCESS:
