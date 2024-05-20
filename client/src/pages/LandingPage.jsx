@@ -15,8 +15,7 @@ const LandingPage = () => {
     <VideoCarousel />
     <div className="bg-black relative z-10">
     <SignUp/>
-    </div>
-    
+    </div> 
   </main>
     </>
    
