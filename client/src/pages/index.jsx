@@ -1,6 +1,7 @@
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
 import LandingPage from './LandingPage';
-import { Header } from '../components/header';
+import Player from './Player';
+import MainPage from './MainPage';
 
 
 function Index() {
@@ -9,9 +10,11 @@ function Index() {
   return (
     <>
     <BrowserRouter>
-    <Header/>
+    
       <Routes>
         <Route path='/' element={<LandingPage/>}/>
+        <Route path='/home' element={<MainPage/>}/>
+        <Route path='/player' element={<Player/>}/>
       </Routes>
     </BrowserRouter>
       

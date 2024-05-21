@@ -1,3 +1,4 @@
+import {Header} from '../components/header.jsx';
 import {Hero} from '../sections/hero.jsx';
 import {Plans} from '../sections/plans.jsx';
 import { VideoCarousel } from '../sections/video-carousel';
@@ -7,6 +8,7 @@ import '../index.css';
 const LandingPage = () => {
   return (
     <>
+    <Header/>
  <main>
     <div className="bg-black relative z-10">
       <Hero />
