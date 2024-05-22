@@ -17,7 +17,6 @@ app.use(express.urlencoded({ extended: true }));
 const connectToMongo = async () => {
     await mongoose.connect(dbConfig.DB_URL);
     console.log("Connected to MongoDB");
-    init();
   };
   
   connectToMongo();

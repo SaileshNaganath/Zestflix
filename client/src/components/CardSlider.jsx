@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import { FaChevronLeft,FaChevronRight } from "react-icons/fa";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import Card from "./Card";
 
@@ -32,7 +33,7 @@ export default React.memo(function CardSlider({ data, title }) {
         <div
           className={`slider-action left ${!showControls ? "none" : ""} flex justify-center items-center`}
         >
-          <AiOutlineLeft onClick={() => handleDirection("left")} />
+          <FaChevronLeft style={{color:"white"}} onClick={() => handleDirection("left")} />
         </div>
         <div className="slider flex" ref={listRef}>
           {data.map((movie, index) => {
@@ -42,7 +43,7 @@ export default React.memo(function CardSlider({ data, title }) {
         <div
           className={`slider-action right ${!showControls ? "none" : ""} flex justify-center items-center`}
         >
-          <AiOutlineRight onClick={() => handleDirection("right")} />
+          <FaChevronRight style={{color:"white"}} onClick={() => handleDirection("right")} />
         </div>
       </div>
     </Container>
@@ -55,6 +56,7 @@ const Container = styled.div`
   padding: 2rem 0;
   h1 {
     margin-left: 50px;
+    color:white;
   }
   .wrapper {
     .slider {

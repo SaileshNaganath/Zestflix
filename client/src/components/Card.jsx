@@ -3,18 +3,14 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { IoPlayCircleSharp } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
-import { RiThumbUpFill, RiThumbDownFill } from "react-icons/ri";
-import { BiChevronDown } from "react-icons/bi";
-import { BsCheck } from "react-icons/bs";
 import axios from "axios";
 
-import { useDispatch } from "react-redux";
-import { removeMovieFromLiked } from "../actions/movieActions";
+import { Button } from "./button";
+
 import video from "../assets/video.mp4";
 
-export default React.memo(function Card({ index, movieData, isLiked = false }) {
+export default React.memo(function Card({ index, movieData }) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
 
 
@@ -39,7 +35,7 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
         alt="card"
         onClick={() => navigate("/player")}
       />
-
+      <p>{movieData.name}</p>
       {isHovered && (
         <div className="hover">
           <div className="image-video-container">
@@ -56,31 +52,18 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
               onClick={() => navigate("/player")}
             />
           </div>
-          <div className="info-container flex column">
-            <h3 className="name" onClick={() => navigate("/player")}>
+          <div className="info-container flex-col">
+            <h3 className="name font-bold" onClick={() => navigate("/player")}>
               {movieData.name}
             </h3>
             
-            <div className="icons flex j-between">
+            <div className="icons flex justify-between items-center">
               <div className="controls flex">
                 <IoPlayCircleSharp
-                  title="Play"
+                  title="Play trailer"
                   onClick={() => navigate("/player")}
-                />
-                <RiThumbUpFill title="Like" />
-                <RiThumbDownFill title="Dislike" />
-                {isLiked ? (
-                  <BsCheck
-                    title="Remove from List"
-                    onClick={() =>
-                      dispatch(
-                        removeMovieFromLiked({ movieId: movieData.id, email })
-                      )
-                    }
-                  />
-                ) : (
-                  <AiOutlinePlus title="Add to my list" onClick={addToList} />
-                )}
+                />                
+                <AiOutlinePlus title="Add to my list" onClick={addToList} />
               </div>
               <div className="genres flex">
               <ul className="flex-col">
@@ -89,9 +72,11 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
                 ))}
               </ul>
             </div>
+            <Button className="text-xs px-3 py-2">Book Now</Button>
             </div>
-           
+            
           </div>
+        
         </div>
       )}
     </Container>
@@ -110,6 +95,9 @@ const Container = styled.div`
     height: 100%;
     z-index: 10;
   }
+  p{
+    color:white;
+  }
   .hover {
     z-index: 99;
     height: max-content;
@@ -119,7 +107,8 @@ const Container = styled.div`
     left: 0;
     border-radius: 0.3rem;
     box-shadow: rgba(0, 0, 0, 0.75) 0px 3px 10px;
-    background-color: white;
+    background-color: rgb(0, 0, 0) ;
+    color:white;
     transition: 0.3s ease-in-out;
     .image-video-container {
       position: relative;
@@ -150,6 +139,8 @@ const Container = styled.div`
     .icons {
       .controls {
         display: flex;
+        align-items:center;
+        justify-content:center;
         gap: 1rem;
       }
       svg {

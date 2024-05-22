@@ -5,12 +5,11 @@ import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMovies, getGenres } from "../actions/movieActions";
-import { FaPlay } from "react-icons/fa";
-import { AiOutlineInfoCircle } from "react-icons/ai";
 import Slider from "../components/Slider";
+import { Button } from "../components/button";
 
 function MainPage() {
-  const [isScrolled, setIsScrolled] = useState(false);
+
   const moviesList = useSelector((state)=>state.movie);
   const {movies,genres,genresLoaded,loading,error} = moviesList
 
@@ -28,10 +27,7 @@ function MainPage() {
   }, [dispatch, genresLoaded, genres]);
 
 
-  window.onscroll = () => {
-    setIsScrolled(window.pageYOffset === 0 ? false : true);
-    return () => (window.onscroll = null);
-  };
+
   if (loading) {
     return <div>Loading...</div>; // Add a loading state
   }
@@ -39,51 +35,39 @@ function MainPage() {
     return <div>Error: {error}</div>;
   }
   return (
-    <Container>
-      <Navbar isScrolled={isScrolled} />
-      <div className="hero">
+    <Container className='main-page'>
+      <Navbar />
+      <section className="hero">
         <img
-          src="/movies/person-in-darkness.webp"
+          src="/movies/dune.webp"
           alt="background"
           className="background-image"
         />
         <div className="container">
-          <div className="logo">
-            <img src="/movies/person-in-darkness.webp" alt="Movie Logo" />
+        
+          <div className="buttons-container">
+          <h1 className="text-white font-bold text-6xl">Dune - Part One</h1>
+          <p className="text-white">#1 Trending Now</p>
+          <div className="flex flex-row gap-4">
+          <Button size='medium' onClick={() => navigate("/player")}>
+              Book Now
+            </Button>
+            <Button size='medium'>
+              Watch Trailer
+            </Button>
           </div>
-          <div className="buttons flex">
-            <button
-              onClick={() => navigate("/player")}
-              className="flex j-center a-center"
-            >
-              <FaPlay />
-              Play
-            </button>
-            <button className="flex j-center a-center">
-              <AiOutlineInfoCircle />
-              More Info
-            </button>
+            
           </div>
         </div>
-      </div>
+      </section>
       <Slider movies={movies} />
     </Container>
   );
 }
 
 const Container = styled.div`
-.j-between {
-  justify-content: space-between;
-}
-
-.j-center {
-  justify-content: center;
-}
-
-.a-center {
-  align-items: center;
-}
-  background-color: white;
+  overflow-x:hidden;
+  background-color: black;
   .hero {
     position: relative;
     .background-image {
@@ -92,6 +76,7 @@ const Container = styled.div`
     img {
       height: 100vh;
       width: 100vw;
+      z-index:-1;
     }
     .container {
       position: absolute;
@@ -103,29 +88,11 @@ const Container = styled.div`
           margin-left: 5rem;
         }
       }
-      .buttons {
-        margin: 5rem;
-        gap: 2rem;
-        button {
-          font-size: 1.4rem;
-          gap: 1rem;
-          border-radius: 0.2rem;
-          padding: 0.5rem;
-          padding-left: 2rem;
-          padding-right: 2.4rem;
-          border: none;
-          cursor: pointer;
-          transition: 0.2s ease-in-out;
-          &:hover {
-            opacity: 0.8;
-          }
-          &:nth-of-type(2) {
-            background-color: rgba(109, 109, 110, 0.7);
-            color: white;
-            svg {
-              font-size: 1.8rem;
-            }
-          }
+      .buttons-container {
+        display:flex;
+        flex-direction:column;
+        margin: 2rem;
+        gap: 0.5rem;
         }
       }
     }
