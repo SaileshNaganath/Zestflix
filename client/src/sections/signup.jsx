@@ -2,8 +2,13 @@ import { useState } from "react";
 import { Container } from "../components/container";
 import { FadeIn } from "../components/fade-in";
 import { Button } from "../components/button";
-import {IconButton,FilledInput,FormControl,InputAdornment,TextField} from '@mui/material';
-import {Visibility,VisibilityOff} from '@mui/icons-material';
+import IconButton from '@mui/material/IconButton';
+import FilledInput from '@mui/material/FilledInput';
+import FormControl from '@mui/material/FormControl';
+import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 
 export const SignUp = () => {

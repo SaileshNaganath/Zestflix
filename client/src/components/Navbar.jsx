@@ -9,8 +9,6 @@ export default function Navbar() {
 
   const links = [
     { name: "Home", link: "/home" },
-    { name: "Movies", link: "/movies" },
-    { name: "Bucket List", link: "/mylist" },
     { name: "Logout", link: "/" },
   ];
 

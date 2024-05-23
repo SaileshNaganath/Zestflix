@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { IoPlayCircleSharp } from "react-icons/io5";
-import { AiOutlinePlus } from "react-icons/ai";
-import axios from "axios";
-
 import { Button } from "./button";
 
 import video from "../assets/video.mp4";
@@ -13,18 +9,9 @@ export default React.memo(function Card({ index, movieData }) {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
 
-
-  const addToList = async () => {
-    try {
-      await axios.post("http://localhost:5000/api/user/add", {
-        email,
-        data: movieData,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  const handleBookNow = () => {
+    navigate("/booking", { state: { movieData } }); // Pass entire movieData object
   };
-
   return (
     <Container
       onMouseEnter={() => setIsHovered(true)}
@@ -58,21 +45,18 @@ export default React.memo(function Card({ index, movieData }) {
             </h3>
             
             <div className="icons flex justify-between items-center">
-              <div className="controls flex">
-                <IoPlayCircleSharp
-                  title="Play trailer"
-                  onClick={() => navigate("/player")}
-                />                
-                <AiOutlinePlus title="Add to my list" onClick={addToList} />
-              </div>
               <div className="genres flex">
               <ul className="flex-col">
-                {movieData.genres.map((genre) => (
-                  <li>{genre}</li>
-                ))}
+                <li>{movieData.genres[0]}</li>
               </ul>
             </div>
-            <Button className="text-xs px-3 py-2">Book Now</Button>
+            <div className="controls flex gap-2">
+            <Button className="text-xs px-3 py-2" onClick={() => navigate("/player")}>
+                Watch Trailer
+                </Button>  
+            <Button className="text-xs px-3 py-2" onClick={handleBookNow}>Book Now</Button>           
+              </div>
+         
             </div>
             
           </div>

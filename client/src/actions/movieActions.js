@@ -1,6 +1,6 @@
 import  AxiosInstance  from '../utils/axiosInstance';
 import axios from 'axios';
-import { GET_GENRES,FETCH_FAIL,FETCH_GENRE_FAILURE,FETCH_GENRE_REQUEST,FETCH_GENRE_SUCCESS,FETCH_TRENDING_FAILURE,FETCH_TRENDING_REQUEST,FETCH_TRENDING_SUCCESS } from './types';
+import { GET_GENRES,FETCH_FAIL,FETCH_TRENDING_FAILURE,FETCH_TRENDING_REQUEST,FETCH_TRENDING_SUCCESS } from './types';
 import { returnErrors } from './errorActions';
 
 import { API_KEY, TMDB_BASE_URL } from "../utils/constants";
@@ -38,6 +38,8 @@ const createArrayFromRawData = (array = [], moviesArray, genres) => {
           name: movie.original_name || movie.original_title,
           image: movie.backdrop_path,
           genres: movieGenres.slice(0, 3),
+          release:movie.release_date,
+          overview:movie.overview
         });
       }
     });
@@ -69,22 +71,7 @@ const createArrayFromRawData = (array = [], moviesArray, genres) => {
     }
   };
   
-  export const fetchDataByGenre = ({ genre, type }) => async (dispatch, getState) => {
-    dispatch({ type: FETCH_GENRE_REQUEST });
   
-    const {
-      movie: { genres },
-    } = getState();
-  
-    try {
-      const url = `${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`;
-      const data = await getRawData(url, genres);
-      dispatch({ type: FETCH_GENRE_SUCCESS, payload: data });
-    } catch (error) {
-      const errorMessage = error.response ? error.response.data : 'Network Error';
-      dispatch({ type: FETCH_GENRE_FAILURE, payload: errorMessage });
-    }
-  };
   
   export const fetchMovies = ({ type }) => async (dispatch, getState) => {
     dispatch({ type: FETCH_TRENDING_REQUEST });
@@ -103,30 +90,5 @@ const createArrayFromRawData = (array = [], moviesArray, genres) => {
     }
   };
 
-  export const getUsersLikedMovies = (email) => dispatch => {
-    dispatch({ type: GET_LIKED_MOVIES_REQUEST });
-  
-    AxiosInstance.get(`http://localhost:5000/api/user/liked/${email}`)
-      .then(response => {
-        const { movies } = response.data;
-        dispatch({ type: GET_LIKED_MOVIES_SUCCESS, payload: movies });
-      })
-      .catch(error => {
-        const errorMessage = error.response ? error.response.data : 'Network Error';
-        dispatch({ type: GET_LIKED_MOVIES_FAILURE, payload: errorMessage });
-      });
-  };
-  
-  export const removeMovieFromLiked = ({ movieId, email }) => dispatch => {
-    dispatch({ type: REMOVE_MOVIE_REQUEST });
-  
-    AxiosInstance.put("http://localhost:5000/api/user/remove", { email, movieId })
-      .then(response => {
-        const { movies } = response.data;
-        dispatch({ type: REMOVE_MOVIE_SUCCESS, payload: movies });
-      })
-      .catch(error => {
-        const errorMessage = error.response ? error.response.data : 'Network Error';
-        dispatch({ type: REMOVE_MOVIE_FAILURE, payload: errorMessage });
-      });
-  };
+
+ 

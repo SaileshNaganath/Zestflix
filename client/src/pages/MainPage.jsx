@@ -29,7 +29,7 @@ function MainPage() {
 
 
   if (loading) {
-    return <div>Loading...</div>; // Add a loading state
+    return <div className="text-4xl flex items-center justify-center">Loading... Connect to a vpn since i use TMDB api which vpn for access</div>; // Add a loading state
   }
   if (error) {
     return <div>Error: {error}</div>;
@@ -49,10 +49,7 @@ function MainPage() {
           <h1 className="text-white font-bold text-6xl">Dune - Part One</h1>
           <p className="text-white">#1 Trending Now</p>
           <div className="flex flex-row gap-4">
-          <Button size='medium' onClick={() => navigate("/player")}>
-              Book Now
-            </Button>
-            <Button size='medium'>
+            <Button size='medium' onClick={() => navigate("/player")}>
               Watch Trailer
             </Button>
           </div>

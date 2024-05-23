@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { FaChevronLeft,FaChevronRight } from "react-icons/fa";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import Card from "./Card";
 
 export default React.memo(function CardSlider({ data, title }) {
@@ -36,8 +35,8 @@ export default React.memo(function CardSlider({ data, title }) {
           <FaChevronLeft style={{color:"white"}} onClick={() => handleDirection("left")} />
         </div>
         <div className="slider flex" ref={listRef}>
-          {data.map((movie, index) => {
-            return <Card movieData={movie} index={index} key={movie.id} />;
+          {data.map((movie) => {
+            return <Card movieData={movie} index={movie.id} key={movie.id} />;
           })}
         </div>
         <div
