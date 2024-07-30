@@ -1,13 +1,14 @@
-import  AxiosInstance  from '../utils/axiosInstance';
+
 import { SIGNUP_SUCCESS,SIGNUP_FAIL,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT_SUCCESS } from './types';
 import { returnErrors } from './errorActions';
+import axios from 'axios';
 
 //signup user
 export const signUp = (user) => dispatch => {
 
     const URL = "/api/auth/signup";
 
-    AxiosInstance.post(URL, user)
+    axios.post(URL, user)
                  .then(res=>dispatch({
                         type: SIGNUP_SUCCESS,
                         payload:res.data

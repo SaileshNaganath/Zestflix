@@ -1,4 +1,4 @@
-import  AxiosInstance  from '../utils/axiosInstance';
+
 import axios from 'axios';
 import { GET_GENRES,FETCH_FAIL,FETCH_TRENDING_FAILURE,FETCH_TRENDING_REQUEST,FETCH_TRENDING_SUCCESS } from './types';
 import { returnErrors } from './errorActions';
@@ -9,7 +9,7 @@ export const getGenres = () => dispatch =>{
     
     const URL =`${TMDB_BASE_URL}/genre/movie/list?api_key=${API_KEY}`;
 
-    AxiosInstance.get(URL)
+    axios.get(URL)
                 .then(res=>dispatch({
                     type:GET_GENRES,
                     payload:res.data
