@@ -3,7 +3,7 @@ import axios from 'axios';
 import { GET_GENRES,FETCH_FAIL,FETCH_TRENDING_FAILURE,FETCH_TRENDING_REQUEST,FETCH_TRENDING_SUCCESS } from './types';
 import { returnErrors } from './errorActions';
 
-import { API_KEY, TMDB_BASE_URL } from "../utils/constants";
+import { API_KEY, TMDB_BASE_URL } from "../utils/Config.jsx";
   
 export const getGenres = () => dispatch =>{
     
